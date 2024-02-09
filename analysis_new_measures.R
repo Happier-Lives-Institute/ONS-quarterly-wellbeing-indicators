@@ -86,7 +86,7 @@ dat_NW <- dat_NW %>%
       variable == "Satisfaction with accommodation" ~ "Fairly or very satisfied with accommodation",
       variable == "Satisfaction with local area" ~ "Fairly or very satisfied with local area",
       variable == "Digital exclusion" ~ "Have not use the internet in the last 3 months (or have never used the internet)",
-      variable == "Satisfaction with education system" ~ "Tend to be satisfied with local area",
+      variable == "Satisfaction with education system" ~ "Tend to be satisfied with education system",
       variable == "Satisfaction with police" ~ "Tend to be satisfied with the police",
       variable == "Satisfaction courts legal" ~ "Tend to be satisfied with courts and legal system",
       TRUE ~ as.character(variable) # Default case to keep original variable if no match
