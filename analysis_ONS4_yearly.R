@@ -3,13 +3,6 @@
 #~############################################################################~#
 
 # Load all the sheets in one go
-my_sheets_ONS4 <- c(
-  "2 Life satisfaction (UK)", 
-  "4 Worthwhile (UK)", 
-  "6 Happiness (UK)", 
-  "8 Anxiety (UK)"
-)
-
 dat_ONS4 <- do.call(rbind, lapply(my_sheets_ONS4, function(sheet_name) {
   load_yearly_sheet(yearly_data_path, sheet = sheet_name)
 }))

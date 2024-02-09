@@ -1,0 +1,17 @@
+condition,estimate,lower,upper,sample_size,table,variable,descriptor
+July to Sept (Q3) 2018 [L],4.2,3.9,4.5,36730,a,Life satisfaction,Low life satisfaction
+July to Sept (Q3) 2022 [S],4.9,4.5,5.3,24120,a,Life satisfaction,Low life satisfaction
+Apr to June (Q2) 2023,5,4.6,5.5,19540,a,Life satisfaction,Low life satisfaction
+July to Sept (Q3) 2023,5.3,4.8,5.9,17020,a,Life satisfaction,Low life satisfaction
+July to Sept (Q3) 2018 [L],3.5,3.3,3.8,36670,a,Worthwhile,Low worthwhileness
+July to Sept (Q3) 2022 [S],4.2,3.8,4.7,24060,a,Worthwhile,Low worthwhileness
+Apr to June (Q2) 2023,3.9,3.4,4.4,19520,a,Worthwhile,Low worthwhileness
+July to Sept (Q3) 2023,4,3.4,4.5,17000,a,Worthwhile,Low worthwhileness
+July to Sept (Q3) 2018 [L],7.7,7.3,8.1,36720,a,Happiness,Low happiness
+July to Sept (Q3) 2022 [S],8.5,7.9,9,24090,a,Happiness,Low happiness
+Apr to June (Q2) 2023,8.2,7.5,8.9,19540,a,Happiness,Low happiness
+July to Sept (Q3) 2023,8.5,7.7,9.3,17020,a,Happiness,Low happiness
+July to Sept (Q3) 2018 [L],19.5,18.8,20.1,36730,a,Feeling anxious,High anxiety
+July to Sept (Q3) 2022 [S],22.4,21.6,23.3,24080,a,Feeling anxious,High anxiety
+Apr to June (Q2) 2023,22.5,21.5,23.5,19530,a,Feeling anxious,High anxiety
+July to Sept (Q3) 2023,21.5,20.4,22.6,17010,a,Feeling anxious,High anxiety

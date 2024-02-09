@@ -3,13 +3,6 @@
 #~############################################################################~#
 
 # Load all the sheets in one go
-my_sheets_ONS4 <- c(
-  "1.1_Life_satisfaction", 
-  "1.2_Worthwhile", 
-  "1.3_Happiness", 
-  "1.4_Feeling_anxious"
-)
-
 dat_ONS4 <- do.call(rbind, lapply(my_sheets_ONS4, function(sheet_name) {
   load_quarter_sheet(quaterly_data_path, sheet = sheet_name)
 }))
@@ -34,11 +27,11 @@ dat_ONS4 <- dat_ONS4 %>%
 
 # Prepare data
 dat_ONS4_time <- dat_ONS4 %>% filter(str_detect(condition, "\\(Q"))
-most_recent_time <- tail(unique(dat_ONS4_time$condition), 1)
+most_recent_time <- tail(unique(dat_ONS4_time$condition), 2)
 
 # Obtain recent insights
 ONS4_time_insights <- dat_ONS4_time %>% filter(
-  condition == most_recent_time |
+  condition %in% most_recent_time | # to also get the last quarter
     str_detect(condition, "\\[L\\]") |
     str_detect(condition, "\\[S\\]")
 )

@@ -18,7 +18,8 @@ additional_colours <- c(
   "#4B0082", # Indigo
   "#FF1493", # Deep pink, replaced one pink with a deeper version for better contrast
   "#4682B4", # Steel blue
-  "#006400"  # Dark green, replacing pale green for better visibility
+  "#006400",  # Dark green, replacing pale green for better visibility
+  "#DC143C" # crimson
 )
 
 # Combine the original and additional colours to create the extended palette

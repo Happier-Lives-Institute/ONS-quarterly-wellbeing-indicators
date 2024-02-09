@@ -18,9 +18,7 @@ Using this data based on the [Open Government Licence](https://www.nationalarchi
 
 First, obtain the code as an R project by clicking `ons_quarterly.Rproj`.
 
-Run the `main.R` file, which will run all the analyses and produce the graphs. You need to provide it with two variables:
-- `quaterly_data_path` which will tell it which data to select.
-- `ouput_path` which will tell it where to output the results.
+Run the `main_xx.R` file realted to the quarter of interset, which will run all the analyses and produce the graphs.
 
 The code functions based on analyses in the different `analysis_XXX.R` files, and is powered by the the `dependencies.R` which contains custom graph functions.
 

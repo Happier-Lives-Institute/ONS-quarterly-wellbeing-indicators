@@ -128,11 +128,13 @@ load_quarter_sheet <- function(xlsx_path, sheet_name) {
     )
   }
   
-  # need to clean [c] to become NA
+  # need to clean [c] and [x] to become NA
   table_a <- table_a %>%
-    mutate(across(everything(), ~str_replace_all(., "\\[c\\]", NA_character_)))
+    mutate(across(everything(), ~str_replace_all(., "\\[c\\]", NA_character_))) %>%
+    mutate(across(everything(), ~str_replace_all(., "\\[x\\]", NA_character_)))
   table_b <- table_b %>%
-    mutate(across(everything(), ~str_replace_all(., "\\[c\\]", NA_character_)))
+    mutate(across(everything(), ~str_replace_all(., "\\[c\\]", NA_character_))) %>%
+    mutate(across(everything(), ~str_replace_all(., "\\[x\\]", NA_character_)))
   
   # Detect if a column has only numeric characters and convert it to numeric
   # Apply transformation conditionally across all character columns

@@ -1,13 +1,17 @@
 condition,estimate,lower,upper,sample_size,table,variable,descriptor
 Apr to June (Q2) 2018 [L],4.3,4.1,4.6,37000,a,Life satisfaction,Low life satisfaction
 Apr to June (Q2) 2022 [S],5,4.6,5.4,24630,a,Life satisfaction,Low life satisfaction
+Jan to Mar (Q1) 2023,5.8,5.3,6.3,21010,a,Life satisfaction,Low life satisfaction
 Apr to June (Q2) 2023,5.1,4.6,5.5,19540,a,Life satisfaction,Low life satisfaction
 Apr to June (Q2) 2018 [L],3.6,3.3,3.8,36900,a,Worthwhile,Low worthwhileness
 Apr to June (Q2) 2022 [S],3.8,3.5,4.2,24560,a,Worthwhile,Low worthwhileness
+Jan to Mar (Q1) 2023,4.6,4.1,5.1,20950,a,Worthwhile,Low worthwhileness
 Apr to June (Q2) 2023,3.9,3.4,4.4,19520,a,Worthwhile,Low worthwhileness
 Apr to June (Q2) 2018 [L],7.4,7,7.8,36990,a,Happiness,Low happiness
 Apr to June (Q2) 2022 [S],8.4,7.9,9,24610,a,Happiness,Low happiness
+Jan to Mar (Q1) 2023,9.2,8.5,9.9,20990,a,Happiness,Low happiness
 Apr to June (Q2) 2023,8.2,7.5,8.9,19540,a,Happiness,Low happiness
 Apr to June (Q2) 2018 [L],19.5,18.9,20.1,36970,a,Feeling anxious,High anxiety
 Apr to June (Q2) 2022 [S],22.9,22,23.7,24600,a,Feeling anxious,High anxiety
+Jan to Mar (Q1) 2023,23.8,22.8,24.8,20990,a,Feeling anxious,High anxiety
 Apr to June (Q2) 2023,22.5,21.5,23.5,19530,a,Feeling anxious,High anxiety
