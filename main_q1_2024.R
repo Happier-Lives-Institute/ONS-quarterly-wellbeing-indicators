@@ -13,7 +13,7 @@ my_dpi <- 1200 # change this parameter for resolution
 
 # Change these as you change quarters
 quaterly_data_path <- "data/ukmeasuresofnationalwellbeingfeb2024.xlsx"
-yearly_data_path <- "data/aprtojune23nonseasonallyadjusted.xlsx"
+yearly_data_path <- "data/julytosept23nonseasonallyadjusted.xlsx"
 output_path <- "q1_2024/"
 
 #~############################################################################~#
