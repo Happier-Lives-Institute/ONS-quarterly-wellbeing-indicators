@@ -48,6 +48,53 @@ write_csv(
 )
 
 #~=======================================================~=
+## General levels of satisfaction ----
+#~=======================================================~=
+
+# First general set
+p_general_sat <- dat_NW_set_SW %>% filter(str_detect(condition, "202")) %>% 
+  # filter to take only the tail of each variable
+  group_by(variable) %>%
+  slice_tail(n = 1) %>%
+  # make a graph with a point and se whiskers for each descriptor
+  ggplot(aes(x=reorder(descriptor, estimate), y=estimate, group=descriptor)) +
+  geom_point(aes(color = descriptor), size = 3) +
+  geom_errorbar(aes(ymin = lower, ymax = upper), width = 0.2) +
+  scale_y_continuous(
+    limits = c(
+      0, 
+      100), 
+    breaks = seq(0, 100, 25), 
+    labels = function(x) paste0(x, "%"),
+    expand = c(0, 2.5)
+  ) +
+  cowplot::theme_cowplot() +
+  labs(x = "", y = "", color = "Satisfaction with ...") +
+  theme(
+    # axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), # Rotate x labels 90°
+    # axis.text.x = element_text(angle = 75, vjust = 0.5, hjust=0.5), # Rotate x labels
+    panel.grid.major = element_line(colour = "lightgrey"), # Add back major grid lines
+    panel.grid.minor = element_line(colour = "lightgrey"), # Add back minor grid lines
+    # Reinsert white background for the plot
+    panel.background = element_rect(fill = "white", colour = "grey"),
+    plot.background = element_rect(fill = "white", colour = NA),
+    legend.position = "bottom",
+    legend.direction = "vertical", # Align legend items horizontally
+  ) +
+  coord_flip() +
+  # remove the colour legend
+  guides(colour = "none") +
+  scale_colour_manual(values = extended_palette); p_general_sat
+  
+# Save the figures
+ggsave(
+  filename = paste0(output_path, "NW_set_SW.png"),
+  plot = p_general_sat,
+  width = 10, height = 8,
+  dpi = my_dpi
+)
+
+#~=======================================================~=
 ## Age ----
 #~=======================================================~=
 
@@ -119,8 +166,8 @@ p_age_SW <- dat_NW_set_SW %>% filter(str_detect(condition, "Aged")) %>%
     # Reinsert white background for the plot
     panel.background = element_rect(fill = "white", colour = "grey"),
     plot.background = element_rect(fill = "white", colour = NA),
-    # legend.position = "bottom",
-    # legend.direction = "vertical", # Align legend items horizontally
+    legend.position = "bottom",
+    legend.direction = "vertical", # Align legend items horizontally
   ) +
   scale_colour_manual(values = extended_palette); p_age_SW
 
@@ -128,7 +175,7 @@ p_age_SW <- dat_NW_set_SW %>% filter(str_detect(condition, "Aged")) %>%
 ggsave(
   filename = paste0(output_path, "NW_age_set_SW.png"),
   plot = p_age_SW,
-  width = 15, height = 8,
+  width = 10, height = 8,
   dpi = my_dpi
 )
 
