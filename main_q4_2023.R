@@ -136,7 +136,7 @@ dat_NW <- dat_NW %>%
       variable == "Loneliness" ~ "Feel lonely often or always",
       variable == "Local community integration" ~ "Strongly agree or agree that different backgrounds get on well together in local area",
       variable == "Satisfaction with health" ~ "Fairly or very satisfied with health",
-      variable == "Satisfaction with healthcare" ~ "Tend to be satisfed with the healthcare system",
+      variable == "Satisfaction with healthcare" ~ "Tend to be satisfied with the healthcare system",
       variable == "Satisfaction with time use" ~ "Fairly or very satisfied with how they spend their time in a typical week",
       variable == "Satisfaction with job" ~ "Fairly or very satisfied with main job",
       variable == "Satisfaction with accommodation" ~ "Fairly or very satisfied with accommodation",

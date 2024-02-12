@@ -98,14 +98,9 @@ ggsave(
 ## Age ----
 #~=======================================================~=
 
-# Custom labeller function
-# Need to fit the strips of the panels
-wrap_label <- function(labels) {
-  sapply(labels, function(label) {
-    wrapped_label <- str_wrap(label, width = 40) # Adjust width as needed
-    wrapped_label
-  })
-}
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+### First set ----
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # First general set
 p_age_1 <- dat_NW_set_1 %>% filter(str_detect(condition, "Aged")) %>% 
@@ -144,6 +139,11 @@ ggsave(
   dpi = my_dpi
 )
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+### Satisfaction ----
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#### General figure ----
 # Satisfaction set
 p_age_SW <- dat_NW_set_SW %>% filter(str_detect(condition, "Aged")) %>% 
   ggplot(aes(x=condition, y=estimate, group=descriptor, color = descriptor)) +
@@ -179,14 +179,78 @@ ggsave(
   dpi = my_dpi
 )
 
+#### Broken apart figure ----
+
+# Make groups to categorise the satisfaction variables
+dat_NW_set_SW <- dat_NW_set_SW %>% mutate(
+  SW_group = case_when(
+    descriptor %in% c(
+        "Tend to be satisfied with the healthcare system",
+        "Tend to be satisfied with education system",
+        "Tend to be satisfied with the police",
+        "Tend to be satisfied with courts and legal system"
+    ) ~ "Healthcare, education, police, courts",
+    descriptor %in% c(
+      "Fairly or very satisfied with health",
+      "Fairly or very satisfied with how they spend their time in a typical week",
+      "Fairly or very satisfied with their education and skills",
+      "Fairly or very satisfied with social relationships"
+    ) ~ "Health, time, education, social relationships",
+    descriptor %in% c(
+      "Fairly or very satisfied with main job",
+      "Fairly or very satisfied with local area",
+      "Fairly or very satisfied with accommodation"
+    ) ~ "Main job, local area, accommodation",
+  )
+)
+
+# One with only the four that are about 'tend to be satisfied with'
+p_age_SW_grouped <- dat_NW_set_SW %>% filter(str_detect(condition, "Aged")) %>% 
+  mutate(descriptor = wrap_text(descriptor, 50)) %>% 
+  ggplot(aes(x=condition, y=estimate, group=descriptor, color = descriptor)) +
+  geom_line(linewidth=1.75) +
+  scale_y_continuous(
+    limits = c(
+      0, 
+      100), 
+    breaks = seq(0, 100, 25), 
+    labels = function(x) paste0(x, "%"),
+    expand = c(0, 0)
+  ) +
+  facet_wrap(~SW_group, scales = "free", labeller = as_labeller(wrap_label), ncol=2) +
+  cowplot::theme_cowplot() +
+  labs(x = "", y = "", color = "Satisfaction with ...") +
+  theme(
+    axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), # Rotate x labels 90°
+    # axis.text.x = element_text(angle = 75, vjust = 0.5, hjust=0.5), # Rotate x labels
+    panel.grid.major = element_line(colour = "lightgrey"), # Add back major grid lines
+    panel.grid.minor = element_line(colour = "lightgrey"), # Add back minor grid lines
+    # Reinsert white background for the plot
+    panel.background = element_rect(fill = "white", colour = "grey"),
+    plot.background = element_rect(fill = "white", colour = NA),
+    strip.background = element_blank(),
+    strip.text = element_blank(),
+    # legend.position = "bottom",
+    legend.direction = "vertical", # Align legend items horizontally
+    legend.justification = "center",
+    # adjust the legend's position so that it is in the third cell of the facet_wrap
+    # might need to fiddle with this and the wrap function
+    legend.position = c(0.75, 0.1)
+    
+  ) +
+  scale_colour_manual(values = extended_palette); p_age_SW_grouped
+
+# save the figure
+ggsave(
+  filename = paste0(output_path, "NW_age_set_SW_grouped.png"),
+  plot = p_age_SW_grouped,
+  width = 10, height = 8,
+  dpi = my_dpi
+)
+
 #~=======================================================~=
 ## Gender ----
 #~=======================================================~=
-
-# Function to wrap text to a specified width to prevent too long y-axis
-wrap_text <- function(text, width = 25) {
-  sapply(text, function(x) str_wrap(x, width = width))
-}
 
 # Make the figures
 p_gender_1 <- make_gender_plot(

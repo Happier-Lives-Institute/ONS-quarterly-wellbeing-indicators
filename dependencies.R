@@ -35,6 +35,20 @@ library(colorspace) # for colour palettes
 # Custom functions ----
 #~############################################################################~#
 
+# Custom labeller function
+# Need to fit the strips of the panels
+wrap_label <- function(labels) {
+  sapply(labels, function(label) {
+    wrapped_label <- str_wrap(label, width = 40) # Adjust width as needed
+    wrapped_label
+  })
+}
+
+# Function to wrap text to a specified width to prevent too long y-axis
+wrap_text <- function(text, width = 25) {
+  sapply(text, function(x) str_wrap(x, width = width))
+}
+
 # Function to check if a column can be fully converted to numeric
 can_be_numeric <- function(x) {
   # Attempt to convert to numeric; NAs are allowed
