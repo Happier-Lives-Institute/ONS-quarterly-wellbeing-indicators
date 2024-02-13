@@ -253,3 +253,35 @@ make_gender_plot <- function(dat, my_y) {
     ) +
     scale_color_manual(values = c("Male" = "#f79321", "Female" = "#3ab7b9")) # Customize colors for Male and Female
 }
+
+# Make stacked plot for the time trend
+stacked_plot <- function(my_data, my_variable, my_labels, my_fill) {
+  
+  my_data %>% filter(variable == my_variable) %>%
+    ggplot(aes(x = year_quarter, y = value, fill = category)) +
+    geom_bar(stat = "identity", position = "stack") + # Stacked bar plot
+    scale_fill_manual(
+      values = my_fill,
+      labels = my_labels
+    ) +
+    cowplot::theme_cowplot() +
+    labs(x = "", y = "", title = my_variable,
+         fill = "") +
+    theme(
+      axis.text.x = element_text(angle = 90, hjust = 0.5, vjust = 0.5, size = 10), 
+      # axis.title.x = element_text(margin= margin(t = 20, r = 0, b = 0, l = 0)),
+      panel.background = element_rect(fill = "white", colour = "grey"),
+      plot.background = element_rect(fill = "white", colour = NA),
+      # Move legend to bottom
+      legend.position = "bottom",
+      # Ensure only one legend for the entire plot
+      legend.justification = "center",
+      legend.box = "horizontal",
+      strip.background = element_blank(),
+      strip.text = element_text(face = "bold")
+    ) +
+    coord_cartesian(ylim = c(0, 100)) +
+    scale_y_continuous(expand = c(0, 0), 
+                       labels = function(x) paste0(x, "%"))
+  
+}
