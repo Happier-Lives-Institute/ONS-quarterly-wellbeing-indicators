@@ -35,6 +35,9 @@ library(colorspace) # for colour palettes
 # Custom functions ----
 #~############################################################################~#
 
+# Not in
+'%ni%' <- Negate('%in%')
+
 # Custom labeller function
 # Need to fit the strips of the panels
 wrap_label <- function(labels) {
