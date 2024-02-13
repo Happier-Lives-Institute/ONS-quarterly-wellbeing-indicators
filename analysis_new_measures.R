@@ -248,12 +248,17 @@ ggsave(
   dpi = my_dpi
 )
 
+# Graph features
+group_linewidth <- 1.5
+group_alpha <- 0.8
+group_h_w <- c(6, 6)
+
 # One with the first group
 p_age_SW_grouped_1 <- dat_NW_set_SW %>% filter(str_detect(condition, "Aged")) %>% 
   filter(SW_group == "Healthcare, education, police, courts") %>% 
   mutate(descriptor = wrap_text(descriptor, 50)) %>% 
   ggplot(aes(x=condition, y=estimate, group=descriptor, color = descriptor)) +
-  geom_line(linewidth=1.75) +
+  geom_line(linewidth=group_linewidth, alpha = group_alpha) +
   scale_y_continuous(
     limits = c(
       0, 
@@ -284,7 +289,7 @@ p_age_SW_grouped_1 <- dat_NW_set_SW %>% filter(str_detect(condition, "Aged")) %>
 ggsave(
   filename = paste0(output_path, "NW_age_set_SW_grouped_1.png"),
   plot = p_age_SW_grouped_1,
-  width = 10, height = 8,
+  width = group_h_w[1], height = group_h_w[2],
   dpi = my_dpi
 )
 
@@ -293,7 +298,7 @@ p_age_SW_grouped_2 <- dat_NW_set_SW %>% filter(str_detect(condition, "Aged")) %>
   filter(SW_group == "Health, time, education, social relationships") %>% 
   mutate(descriptor = wrap_text(descriptor, 50)) %>% 
   ggplot(aes(x=condition, y=estimate, group=descriptor, color = descriptor)) +
-  geom_line(linewidth=1.75) +
+  geom_line(linewidth=group_linewidth, alpha = group_alpha) +
   scale_y_continuous(
     limits = c(
       0, 
@@ -324,7 +329,7 @@ p_age_SW_grouped_2 <- dat_NW_set_SW %>% filter(str_detect(condition, "Aged")) %>
 ggsave(
   filename = paste0(output_path, "NW_age_set_SW_grouped_2.png"),
   plot = p_age_SW_grouped_2,
-  width = 10, height = 8,
+  width = group_h_w[1], height = group_h_w[2],
   dpi = my_dpi
 )
 
@@ -333,7 +338,7 @@ p_age_SW_grouped_3 <- dat_NW_set_SW %>% filter(str_detect(condition, "Aged")) %>
   filter(SW_group == "Main job, local area, accommodation") %>% 
   mutate(descriptor = wrap_text(descriptor, 50)) %>% 
   ggplot(aes(x=condition, y=estimate, group=descriptor, color = descriptor)) +
-  geom_line(linewidth=1.75) +
+  geom_line(linewidth=group_linewidth, alpha = group_alpha) +
   scale_y_continuous(
     limits = c(
       0, 
@@ -364,7 +369,7 @@ p_age_SW_grouped_3 <- dat_NW_set_SW %>% filter(str_detect(condition, "Aged")) %>
 ggsave(
   filename = paste0(output_path, "NW_age_set_SW_grouped_3.png"),
   plot = p_age_SW_grouped_3,
-  width = 10, height = 8,
+  width = group_h_w[1], height = group_h_w[2],
   dpi = my_dpi
 )
 
@@ -382,7 +387,7 @@ p_gender_1 <- make_gender_plot(
 ggsave(
   filename = paste0(output_path, "NW_gender_1.png"),
   plot = p_gender_1,
-  width = 10, height = 8,
+  width = 8, height = 6,
   dpi = my_dpi
 )
 
@@ -395,6 +400,6 @@ p_gender_SW <- make_gender_plot(
 ggsave(
   filename = paste0(output_path, "NW_gender_SW.png"),
   plot = p_gender_SW,
-  width = 10, height = 8,
+  width = 8, height = 7,
   dpi = my_dpi
 )
