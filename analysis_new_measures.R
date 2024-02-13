@@ -47,6 +47,9 @@ write_csv(
   paste0(output_path, "NW_time_insights.csv")
 )
 
+# Visualise only the latest data
+NW_time_insights_latest <- NW_time_insights %>% group_by(variable) %>% slice_tail(n = 1)
+
 #~=======================================================~=
 ## General levels of satisfaction ----
 #~=======================================================~=
@@ -370,6 +373,16 @@ ggsave(
   filename = paste0(output_path, "NW_age_set_SW_grouped_3.png"),
   plot = p_age_SW_grouped_3,
   width = group_h_w[1], height = group_h_w[2],
+  dpi = my_dpi
+)
+
+# Make all three into one patchwork figure
+p_age_SW_grouped_patch <- p_age_SW_grouped_1 + p_age_SW_grouped_2 + p_age_SW_grouped_3 + plot_spacer()
+# save the figure
+ggsave(
+  filename = paste0(output_path, "NW_age_set_SW_grouped_patch.png"),
+  plot = p_age_SW_grouped_patch,
+  width = 10, height = 10,
   dpi = my_dpi
 )
 
