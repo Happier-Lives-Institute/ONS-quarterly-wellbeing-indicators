@@ -248,6 +248,126 @@ ggsave(
   dpi = my_dpi
 )
 
+# One with the first group
+p_age_SW_grouped_1 <- dat_NW_set_SW %>% filter(str_detect(condition, "Aged")) %>% 
+  filter(SW_group == "Healthcare, education, police, courts") %>% 
+  mutate(descriptor = wrap_text(descriptor, 50)) %>% 
+  ggplot(aes(x=condition, y=estimate, group=descriptor, color = descriptor)) +
+  geom_line(linewidth=1.75) +
+  scale_y_continuous(
+    limits = c(
+      0, 
+      100), 
+    breaks = seq(0, 100, 25), 
+    labels = function(x) paste0(x, "%"),
+    expand = c(0, 0)
+  ) +
+  cowplot::theme_cowplot() +
+  labs(x = "", y = "", color = "Satisfaction with ...") +
+  theme(
+    axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), # Rotate x labels 90°
+    # axis.text.x = element_text(angle = 75, vjust = 0.5, hjust=0.5), # Rotate x labels
+    panel.grid.major = element_line(colour = "lightgrey"), # Add back major grid lines
+    panel.grid.minor = element_line(colour = "lightgrey"), # Add back minor grid lines
+    # Reinsert white background for the plot
+    panel.background = element_rect(fill = "white", colour = "grey"),
+    plot.background = element_rect(fill = "white", colour = NA),
+    strip.background = element_blank(),
+    strip.text = element_blank(),
+    legend.position = "bottom",
+    legend.direction = "vertical", # Align legend items horizontally
+    legend.justification = "center",
+  ) +
+  scale_colour_manual(values = extended_palette); p_age_SW_grouped_1
+
+# save the figure
+ggsave(
+  filename = paste0(output_path, "NW_age_set_SW_grouped_1.png"),
+  plot = p_age_SW_grouped_1,
+  width = 10, height = 8,
+  dpi = my_dpi
+)
+
+# One with the second group
+p_age_SW_grouped_2 <- dat_NW_set_SW %>% filter(str_detect(condition, "Aged")) %>% 
+  filter(SW_group == "Health, time, education, social relationships") %>% 
+  mutate(descriptor = wrap_text(descriptor, 50)) %>% 
+  ggplot(aes(x=condition, y=estimate, group=descriptor, color = descriptor)) +
+  geom_line(linewidth=1.75) +
+  scale_y_continuous(
+    limits = c(
+      0, 
+      100), 
+    breaks = seq(0, 100, 25), 
+    labels = function(x) paste0(x, "%"),
+    expand = c(0, 0)
+  ) +
+  cowplot::theme_cowplot() +
+  labs(x = "", y = "", color = "Satisfaction with ...") +
+  theme(
+    axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), # Rotate x labels 90°
+    # axis.text.x = element_text(angle = 75, vjust = 0.5, hjust=0.5), # Rotate x labels
+    panel.grid.major = element_line(colour = "lightgrey"), # Add back major grid lines
+    panel.grid.minor = element_line(colour = "lightgrey"), # Add back minor grid lines
+    # Reinsert white background for the plot
+    panel.background = element_rect(fill = "white", colour = "grey"),
+    plot.background = element_rect(fill = "white", colour = NA),
+    strip.background = element_blank(),
+    strip.text = element_blank(),
+    legend.position = "bottom",
+    legend.direction = "vertical", # Align legend items horizontally
+    legend.justification = "center",
+  ) +
+  scale_colour_manual(values = extended_palette[5:length(extended_palette)]); p_age_SW_grouped_2
+
+# save the figure
+ggsave(
+  filename = paste0(output_path, "NW_age_set_SW_grouped_2.png"),
+  plot = p_age_SW_grouped_2,
+  width = 10, height = 8,
+  dpi = my_dpi
+)
+
+# One with the third group
+p_age_SW_grouped_3 <- dat_NW_set_SW %>% filter(str_detect(condition, "Aged")) %>% 
+  filter(SW_group == "Main job, local area, accommodation") %>% 
+  mutate(descriptor = wrap_text(descriptor, 50)) %>% 
+  ggplot(aes(x=condition, y=estimate, group=descriptor, color = descriptor)) +
+  geom_line(linewidth=1.75) +
+  scale_y_continuous(
+    limits = c(
+      0, 
+      100), 
+    breaks = seq(0, 100, 25), 
+    labels = function(x) paste0(x, "%"),
+    expand = c(0, 0)
+  ) +
+  cowplot::theme_cowplot() +
+  labs(x = "", y = "", color = "Satisfaction with ...") +
+  theme(
+    axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), # Rotate x labels 90°
+    # axis.text.x = element_text(angle = 75, vjust = 0.5, hjust=0.5), # Rotate x labels
+    panel.grid.major = element_line(colour = "lightgrey"), # Add back major grid lines
+    panel.grid.minor = element_line(colour = "lightgrey"), # Add back minor grid lines
+    # Reinsert white background for the plot
+    panel.background = element_rect(fill = "white", colour = "grey"),
+    plot.background = element_rect(fill = "white", colour = NA),
+    strip.background = element_blank(),
+    strip.text = element_blank(),
+    legend.position = "bottom",
+    legend.direction = "vertical", # Align legend items horizontally
+    legend.justification = "center",
+  ) +
+  scale_colour_manual(values = extended_palette[9:length(extended_palette)]); p_age_SW_grouped_3
+
+# save the figure
+ggsave(
+  filename = paste0(output_path, "NW_age_set_SW_grouped_3.png"),
+  plot = p_age_SW_grouped_3,
+  width = 10, height = 8,
+  dpi = my_dpi
+)
+
 #~=======================================================~=
 ## Gender ----
 #~=======================================================~=
