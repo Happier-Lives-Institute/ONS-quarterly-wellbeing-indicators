@@ -40,6 +40,10 @@ dat_NW_RG <- dat_NW_RG %>% mutate(
   )
 )
 
+# Reorder so that it goes systems, social, and personal
+dat_NW_RG$SW_group <- factor(dat_NW_RG$SW_group, levels = c("Systems", "Social", "Personal"))
+dat_NW_RG <- arrange(dat_NW_RG, desc(SW_group))
+
 #~=======================================================~=
 ## Systems ----
 #~=======================================================~=
@@ -177,11 +181,30 @@ ggsave(
 #~############################################################################~#
 
 # Make the figures
-p_RG_gender <- make_gender_plot(
-  dat_NW_RG %>% filter(condition %in% c("Male", "Female")) %>% 
-    mutate(descriptor = wrap_text(descriptor, width = 30)), 
-  ""
-) +theme(legend.margin = margin(t = -25, unit = "pt")); p_RG_gender
+p_RG_gender <- dat_NW_RG %>% filter(condition %in% c("Male", "Female")) %>% 
+  mutate(descriptor = wrap_text(descriptor, width = 30), ordering = 1:n()) %>% 
+  ggplot(aes(x = estimate, y = reorder(descriptor, -ordering), group = condition, color = condition)) +
+  geom_line(aes(group = descriptor), colour = "darkgrey") + # Draw lines between Male and Female for each variable
+  geom_point(size = 3, alpha = 0.7) + # Draw circles for Male and Female; adjust size as needed
+  scale_x_continuous(
+    limits = c(0, 100),
+    labels = function(x) paste0(x, "%")) +
+  # scale_shape_manual(values = c("Male" = 21, "Female" = 21)) + # Ensure both Male and Female are represented by circles
+  labs(x = "", y = "", color = "Sex") + # Label x and y axes
+  cowplot::theme_cowplot() + # Use a minimal theme for a clean look
+  theme(
+    legend.position = "bottom", # Move legend to the bottom
+    legend.direction = "horizontal", # Align legend items horizontally
+    legend.box = "horizontal",
+    legend.justification = "center",
+    panel.grid.major = element_line(colour = "lightgrey"), # Add back major grid lines
+    panel.grid.minor = element_line(colour = "lightgrey"), # Add back minor grid lines
+    # Reinsert white background for the plot
+    panel.background = element_rect(fill = "white", colour = "grey"),
+    plot.background = element_rect(fill = "white", colour = NA)
+  ) +
+  scale_color_manual(values = c("Male" = "#f79321", "Female" = "#3ab7b9")); p_RG_gender # Customize colors for Male and Female
+
 
 ggsave(
   filename = paste0(output_path, "NW_RG_gender.png"),
