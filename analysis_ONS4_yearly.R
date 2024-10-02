@@ -104,6 +104,57 @@ ggsave(
   dpi = my_dpi
 )
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+### Reverse Anxiety ----
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+p_time_q_reverse <- dat_ONS4 %>%
+  mutate(
+    anxiety_reversed = ifelse(variable == "Anxiety", 10 - score, NA),
+    score = ifelse(variable == "Anxiety", score, score)
+  ) %>%
+  pivot_longer(cols = c(score, anxiety_reversed), 
+               names_to = "variable_type", 
+               values_to = "score", 
+               values_drop_na = TRUE) %>%
+  ggplot(aes(x = year_quarter, y = score, group = interaction(variable, variable_type), color = variable)) +
+  geom_line(aes(linetype = variable_type), linewidth = 1) + 
+  cowplot::theme_cowplot() +
+  scale_y_continuous(limits = c(0, 10), breaks = 0:10) +
+  labs(x = "Time (year and quarter)", y = "Average score",
+       color = "Wellbeing indicator") +
+  theme(
+    axis.text.x = element_text(angle = 90, hjust = 0.5, vjust = 0.5, size = 10),
+    panel.grid.major.x = element_blank(),  # Remove grid lines from the x-axis
+    panel.grid.major.y = element_line(colour = "lightgrey"),  # Keep grid lines only on the y-axis
+    panel.background = element_rect(fill = "white", colour = "grey"),
+    plot.background = element_rect(fill = "white", colour = NA),
+  ) +
+  scale_color_manual(
+    values = c(
+      "Worthwhile" = "#CC79A7",  # Muted Pink
+      "Life satisfaction" = "#009E73",  # Muted Green
+      "Happiness" = "#0072B2",  # Muted Blue
+      "Anxiety" = "#D55E00"  # Muted Orange-Red
+    )
+  ) +
+  scale_linetype_manual(
+    values = c("score" = "solid", "anxiety_reversed" = "dashed"),
+    guide = "none"  # Only adjust the linetypes, without adding to the legend
+  ) +
+  scale_linetype_manual(
+    values = c("score" = "solid", "anxiety_reversed" = "longdash"),  # Custom dash pattern for less white space
+    guide = "none"  # Only adjust the linetypes, without adding to the legend
+    )
+
+p_time_q_reverse
+
+ggsave(
+  filename = paste0(output_path, "ONS4_time_scores_reverse.png"),
+  plot = p_time_q_reverse,
+  width = 8, height = 5,
+  dpi = my_dpi
+)
+
 #~=======================================================~=
 ## Over time stacked ----
 #~=======================================================~=
