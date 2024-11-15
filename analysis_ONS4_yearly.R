@@ -123,7 +123,7 @@ p_time_q_reverse <- dat_ONS4 %>%
   labs(x = "Time (year and quarter)", y = "Average score",
        color = "Wellbeing indicator") +
   theme(
-    axis.text.x = element_text(angle = 90, hjust = 0.5, vjust = 0.5, size = 10),
+    axis.text.x = element_text(angle = 90, hjust = 0.5, vjust = 0.5, size = 7),
     panel.grid.major.x = element_blank(),  # Remove grid lines from the x-axis
     panel.grid.major.y = element_line(colour = "lightgrey"),  # Keep grid lines only on the y-axis
     panel.background = element_rect(fill = "white", colour = "grey"),
